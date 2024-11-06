@@ -1,0 +1,34 @@
+#include<stdio.h>
+	 double findvalue(double x)
+	{								
+		double y;                                                            //函數findvalue,變數為浮點數x
+		y=0.0021*x*x*x*x*x+0.00067*(x-13)*(x-13)*(x-13)*(x-13)+46.7*x-100;   //令浮點數y，y=函數值
+		return y;
+	}
+int main(){
+	double root1,c,root2; 		主程式:
+	double a=-15;               	//令估計值1=root1、估計值2=root2 中間值=c 為浮點數
+	double b=15;
+	
+	while(b-a>0.000001)          	//當兩側邊界距離大於0.000001時，執行以下loop
+	{
+	   double c=(a+b)/2;
+				  //printf("%.6f\n",c);	[debug用]	//浮點數c=a,b中間值
+									先定從b側開始被c取代
+	       if(findvalue(c)*findvalue(a)<0)				如果c值代入f(x)跟a值代入f(x)相乘為負值，代表根在兩邊界之間。取代可以成立
+		{							反之，如果相乘為正值，則根不在邊界之間，取代不成立。
+		b=c;//b取代c
+		}
+		else
+		{
+		a=c;//a取代c	
+	    }
+	    			 //printf("a=%.6f\n",a);
+	  			 // printf("b=%.6f\n",b); [debug]
+	}
+	root1=a;//估計值1
+	root2=b;//估計值2
+	printf("%.8f to %.8f",root1,root2);//真正根在估計值1~估計值2之間
+	
+	return 0;
+}
